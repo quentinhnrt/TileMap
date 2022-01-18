@@ -26,8 +26,7 @@ class CrossyRoadActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_crossy_road)
         // Chargement des feuilles de sprites
-        SpriteSheet.register(R.drawable.road, 5, 4, this)
-        SpriteSheet.register(R.drawable.car, 3, 1, this)
+
 
         var finish = 0
         gameView.apply {
