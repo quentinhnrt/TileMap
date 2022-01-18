@@ -1,5 +1,6 @@
 package fr.iutlens.dubois.carte
 
+import android.content.Intent
 import android.graphics.Matrix
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -14,14 +15,14 @@ import fr.iutlens.dubois.carte.transform.FitTransform
 import fr.iutlens.dubois.carte.transform.FocusTransform
 import fr.iutlens.dubois.carte.utils.SpriteSheet
 import kotlin.math.abs
-
+import kotlin.reflect.KClass
 
 
 class MainActivity : AppCompatActivity() {
 
     private val map by lazy { TiledArea(R.drawable.decor, Decor(Decor.map)) }
     private val room by lazy { TiledArea(R.drawable.decor, Decor(Decor.room)) }
-    private val hero by lazy { BasicSprite(R.drawable.car, map, 8.5F, 4.5F) }
+    private val hero by lazy { BasicSprite(R.drawable.car, map, 8.5F, 3.5F) }
     private val gameView by lazy { findViewById<GameView>(R.id.gameView) }
 
 
@@ -114,8 +115,9 @@ class MainActivity : AppCompatActivity() {
             dx = 0f
             dy = if (dy > 0) 1f else -1f
         }
-        hero.x += dx
-        hero.y += dy
+        if (traversable(hero.x+dx, hero.y+dy)) {
+            hero.x += dx
+            hero.y += dy}
         Log.d("onTouch","${hero.x}, ${hero.y}")
        // Toast.makeText(this,"Test",Toast.LENGTH_SHORT).show()
 
@@ -124,15 +126,27 @@ class MainActivity : AppCompatActivity() {
         true
     } else false
 
+    private fun traversable(x: Float, y: Float): Boolean {
+        val case = map.data.get(y.toInt(),x.toInt())
+        Log.d("case",case.toString())
+       return when(case){
+            /*C,8,9*/
+            7,8,11 -> true
+            else ->false
+
+        }
+
+    }
+
     private fun testCase() {
         when (hero.x to hero.y) {
-            11.5f to 1.5f -> launch("Croasy Road")
-            4.5f to 1.5f -> launch(" Crous Catching")
+            11.5f to 1.5f -> launch("Crossyroad", Crossyroad::class)
+            4.5f to 1.5f -> launch("fruitcatching", Crossyroad::class)
         }
     }
 
-    private fun launch(text: String) {
-        Toast.makeText(this, text, Toast.LENGTH_SHORT).show()
-
+    private fun launch(text: String, clazz: KClass<Crossyroad>) {
+        val intent= Intent(this, clazz.java)
+        startActivity(intent)
     }
 }
