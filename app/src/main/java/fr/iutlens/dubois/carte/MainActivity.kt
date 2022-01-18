@@ -3,8 +3,10 @@ package fr.iutlens.dubois.carte
 import android.graphics.Matrix
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import android.view.MotionEvent
 import android.widget.Button
+import android.widget.Toast
 import fr.iutlens.dubois.carte.sprite.BasicSprite
 import fr.iutlens.dubois.carte.sprite.SpriteList
 import fr.iutlens.dubois.carte.sprite.TiledArea
@@ -114,7 +116,23 @@ class MainActivity : AppCompatActivity() {
         }
         hero.x += dx
         hero.y += dy
+        Log.d("onTouch","${hero.x}, ${hero.y}")
+       // Toast.makeText(this,"Test",Toast.LENGTH_SHORT).show()
+
+        testCase()
         gameView.invalidate()
         true
     } else false
+
+    private fun testCase() {
+        when (hero.x to hero.y) {
+            11.5f to 1.5f -> launch("Croasy Road")
+            4.5f to 1.5f -> launch(" Crous Catching")
+        }
+    }
+
+    private fun launch(text: String) {
+        Toast.makeText(this, text, Toast.LENGTH_SHORT).show()
+
+    }
 }
