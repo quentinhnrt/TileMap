@@ -1,6 +1,7 @@
 package fr.iutlens.dubois.carte
 
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.MotionEvent
 import androidx.appcompat.app.AppCompatActivity
@@ -8,14 +9,13 @@ import androidx.appcompat.app.AppCompatActivity
 import fr.iutlens.dubois.carte.sprite.BasicSprite
 import fr.iutlens.dubois.carte.sprite.TiledArea
 import fr.iutlens.dubois.carte.transform.FocusTransform
-import fr.iutlens.dubois.carte.utils.SpriteSheet
 import java.util.*
 import kotlin.concurrent.schedule
 import kotlin.math.abs
 
 class CrossyRoadActivity : AppCompatActivity() {
     private val theRoad by lazy { TiledArea(R.drawable.road, Decor(Decor.crossy)) }
-    private val hero by lazy { BasicSprite(R.drawable.car, theRoad, 8.5F, 4.5F) }
+    private val hero by lazy { BasicSprite(R.drawable.character64, theRoad, 6.5F, 1.5F) }
     private val gameView by lazy { findViewById<GameView>(R.id.gameViewRoad) }
     private val tab = Decor.crossy
     private val beginX = hero.x
@@ -28,7 +28,7 @@ class CrossyRoadActivity : AppCompatActivity() {
         // Chargement des feuilles de sprites
 
 
-        var finish = 0
+
         gameView.apply {
             background = theRoad
             sprite = hero
@@ -41,20 +41,27 @@ class CrossyRoadActivity : AppCompatActivity() {
 
             val y = hero.y
             val x = hero.x
-            if(finish == 0) if(tab[y.toInt()][x.toInt()] == '7'){
-                hero.x = beginX
-                hero.y = beginY
-            }else{
-                if(finish == 0) if(tab[y.toInt()][x.toInt()] == 'H'){
-                    cancel()
-                    finish = 1
-                }
+
+            when(tab[y.toInt()][x.toInt()]){
+                '6','4','5','3' -> gameOver()
+                '7' -> cancel()
             }
+
             hero.y += 1f
             gameView.invalidate()
 
+            when(tab[y.toInt()][x.toInt()]){
+                '6','4','5','3' -> gameOver()
+                '7' -> win()
+            }
+
 
         }
+    }
+
+    private fun win() {
+        val intent= Intent(this, MainActivity::class.java)
+        startActivity(intent)
     }
 
     private fun onTouchMap(
@@ -77,11 +84,22 @@ class CrossyRoadActivity : AppCompatActivity() {
 
         val y = hero.y
         val x = hero.x
-        if(tab[y.toInt()][x.toInt()] == '7'){
-            hero.x = beginX
-            hero.y = beginY
+
+        when(tab[y.toInt()][x.toInt()]){
+            '6','4','5','3' -> gameOver()
         }
+
+
+
+
+
+
 
         true
     } else false
+
+    private fun gameOver(){
+        hero.x = beginX
+        hero.y = beginY
+    }
 }

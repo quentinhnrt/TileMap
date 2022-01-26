@@ -11,7 +11,7 @@ class LauncherActivity : AppCompatActivity() {
         setContentView(R.layout.activity_launcher)
 
         SpriteSheet.register(R.drawable.road, 5, 4, this)
-        SpriteSheet.register(R.drawable.car, 3, 1, this)
+        SpriteSheet.register(R.drawable.character64, 1, 1, this)
     }
 
     fun main(view: android.view.View) {
