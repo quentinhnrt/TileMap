@@ -22,7 +22,7 @@ class MainActivity : AppCompatActivity() {
 
     private val map by lazy { TiledArea(R.drawable.decor, Decor(Decor.map)) }
     private val room by lazy { TiledArea(R.drawable.decor, Decor(Decor.room)) }
-    private val hero by lazy { BasicSprite(R.drawable.car, map, 8.5F, 3.5F) }
+    private val hero by lazy { BasicSprite(R.drawable.character, map, 8.5F, 3.5F) }
     private val gameView by lazy { findViewById<GameView>(R.id.gameView) }
 
 
@@ -32,7 +32,7 @@ class MainActivity : AppCompatActivity() {
 
         // Chargement des feuilles de sprites
         SpriteSheet.register(R.drawable.decor, 5, 4, this)
-        SpriteSheet.register(R.drawable.car, 3, 1, this)
+        SpriteSheet.register(R.drawable.character, 1, 1, this)
 
         // Par défaut on démarre sur la configuration map
         configMap()
@@ -48,7 +48,7 @@ class MainActivity : AppCompatActivity() {
         // Création des différents éléments à afficher dans la vue
         val list = SpriteList() // Notre liste de sprites
         for(i in 1..7){ // On crée plusieurs sprites aléatoires
-            list.add(BasicSprite(R.drawable.car, room,
+            list.add(BasicSprite(R.drawable.character, room,
                 (room.data.sizeX*Math.random()).toFloat(),
                 (room.data.sizeY*Math.random()).toFloat(),
                 (0..2).random()))
@@ -131,7 +131,7 @@ class MainActivity : AppCompatActivity() {
         Log.d("case",case.toString())
        return when(case){
             /*C,8,9*/
-            7,8,11 -> true
+            2,3,7,8,11 -> true
             else ->false
 
         }
