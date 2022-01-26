@@ -4,13 +4,11 @@
     <option name="filePathToZoomLevelMap">
       <map>
         <entry key="../../../../layout/custom_preview.xml" value="0.165" />
-        <entry key="..\:/Users/flore/AndroidStudioProjects/TileMap/app/src/main/res/layout/activity_crossyroad.xml" value="0.1" />
-        <entry key="..\:/Users/flore/AndroidStudioProjects/TileMap/app/src/main/res/layout/activity_demineur.xml" value="0.13601823708206687" />
-        <entry key="..\:/Users/flore/AndroidStudioProjects/TileMap/app/src/main/res/layout/activity_fruitcatching.xml" value="0.13601823708206687" />
-        <entry key="..\:/Users/flore/AndroidStudioProjects/TileMap/app/src/main/res/layout/activity_launcher.xml" value="0.13601823708206687" />
-        <entry key="..\:/Users/flore/AndroidStudioProjects/TileMap/app/src/main/res/layout/activity_main.xml" value="0.1" />
-        <entry key="..\:/Users/flore/AndroidStudioProjects/TileMap/app/src/main/res/layout/activity_quiz.xml" value="0.12917933130699089" />
-        <entry key="app/src/main/res/layout/activity_main.xml" value="0.165" />
+        <entry key="app/src/main/res/layout/activity_crossyroad.xml" value="0.4046875" />
+        <entry key="app/src/main/res/layout/activity_demineur.xml" value="0.4046875" />
+        <entry key="app/src/main/res/layout/activity_fruitcatching.xml" value="0.4046875" />
+        <entry key="app/src/main/res/layout/activity_launcher.xml" value="0.4046875" />
+        <entry key="app/src/main/res/layout/activity_main.xml" value="0.5" />
       </map>
     </option>
   </component>
