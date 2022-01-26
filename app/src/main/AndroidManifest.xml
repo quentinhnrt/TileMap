@@ -19,7 +19,7 @@
             android:name=".fruitcatching"
             android:exported="false" />
         <activity
-            android:name=".Crossyroad"
+            android:name=".CrossyRoadActivity"
             android:exported="false" />
         <activity
             android:name=".LauncherActivity"
