@@ -10,6 +10,12 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Carte">
         <activity
+            android:name=".quiz"
+            android:exported="false" />
+        <activity
+            android:name=".Demineur"
+            android:exported="false" />
+        <activity
             android:name=".fruitcatching"
             android:exported="false" />
         <activity
