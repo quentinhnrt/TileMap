@@ -1,25 +1,20 @@
 package fr.iutlens.dubois.carte
 
-import android.content.Intent
 import android.graphics.Matrix
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.view.MotionEvent
-import android.widget.Button
 import android.widget.Toast
 import fr.iutlens.dubois.carte.sprite.BasicSprite
-import fr.iutlens.dubois.carte.sprite.SpriteList
 import fr.iutlens.dubois.carte.sprite.TiledArea
 import fr.iutlens.dubois.carte.transform.FitTransform
-import fr.iutlens.dubois.carte.transform.FocusTransform
 import fr.iutlens.dubois.carte.utils.SpriteSheet
-import kotlin.math.abs
 
 class FruitActivity : AppCompatActivity() {
 
     private val room by lazy { TiledArea(R.drawable.decor, Decor(Decor.room)) }
-    private val hero by lazy { BasicSprite(R.drawable.character, room, 5.5F, 8.5F) }
+    private val hero by lazy { BasicSprite(R.drawable.character_fruit, room, 5.5F, 8.5F) }
     private val fruit by lazy { BasicSprite(R.drawable.fruit, room, 4.5F, 8.5F) }
 
     private val gameView by lazy { findViewById<GameView>(R.id.gameViewfruit) }
@@ -30,7 +25,7 @@ class FruitActivity : AppCompatActivity() {
 
         // Chargement des feuilles de sprites
         SpriteSheet.register(R.drawable.decor, 5, 4, this)
-        SpriteSheet.register(R.drawable.character, 1, 1, this)
+        SpriteSheet.register(R.drawable.character_fruit, 1, 1, this)
         SpriteSheet.register(R.drawable.fruit, 1, 1, this)
 
         // Par défaut on démarre sur la configuration map
