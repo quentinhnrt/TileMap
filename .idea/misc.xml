@@ -3,6 +3,7 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="../../../../../layout/custom_preview.xml" value="0.14322916666666666" />
         <entry key="../../../../layout/custom_preview.xml" value="0.165" />
         <entry key="app/src/main/res/layout/activity_crossyroad.xml" value="0.4046875" />
         <entry key="app/src/main/res/layout/activity_demineur.xml" value="0.4046875" />
