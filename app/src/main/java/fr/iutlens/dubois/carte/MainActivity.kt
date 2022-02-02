@@ -140,12 +140,12 @@ class MainActivity : AppCompatActivity() {
 
     private fun testCase() {
         when (hero.x to hero.y) {
-            11.5f to 1.5f -> launch("Crossyroad", Crossyroad::class)
-            4.5f to 1.5f -> launch("fruitcatching", Crossyroad::class)
+            20.5f to 12.5f -> launch("Crossyroad", CrossyRoadActivity::class)
+            4.5f to 1.5f -> launch("fruitcatching", CrossyRoadActivity::class)
         }
     }
 
-    private fun launch(text: String, clazz: KClass<Crossyroad>) {
+    private fun<T : AppCompatActivity> launch(text: String, clazz: KClass<T>) {
         val intent= Intent(this, clazz.java)
         startActivity(intent)
     }
