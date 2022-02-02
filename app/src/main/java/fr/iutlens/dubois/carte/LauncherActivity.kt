@@ -20,7 +20,7 @@ class LauncherActivity : AppCompatActivity() {
     }
 
     fun Fruit(view: android.view.View) {
-        val intent=Intent(this, fruitcatching::class.java)
+        val intent=Intent(this, FruitActivity::class.java)
         startActivity(intent)}
 
     fun Crossy(view: android.view.View) {
