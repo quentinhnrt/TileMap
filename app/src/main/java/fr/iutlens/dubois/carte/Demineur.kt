@@ -26,29 +26,21 @@ class Demineur : AppCompatActivity() {
         configMap()
     }
     //Declare variables
-
     private val mineMap = MineMap(10,20)
     private val map by lazy { TiledArea(R.drawable.demineur, mineMap) }
-    private val hero by lazy { BasicSprite(R.drawable.car, map, 8.5F, 4.5F) }
     private val gameView by lazy { findViewById<GameView>(R.id.gameView) }
     private fun configMap() {
-        // Configuration de gameView
         gameView.apply {
             background = map
-//            sprite = hero
             transform = FitTransform(this, map, Matrix.ScaleToFit.CENTER)
-
         }
         gameView.onTouch = this::onTouchShow
         gameView.invalidate()
     }
-
-
     private fun onTouchShow(
         point: FloatArray,
         event: MotionEvent,
     ) : Boolean {
-        Log.d("onTouchShow","Ca marche")
         return when(event.action) {
             MotionEvent.ACTION_DOWN -> true
             MotionEvent.ACTION_MOVE -> true
