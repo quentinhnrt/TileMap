@@ -32,8 +32,9 @@
         app:layout_constraintTop_toTopOf="@+id/imageView2"
         app:layout_constraintVertical_bias="0.095" />
 
-    <FrameLayout
+    <LinearLayout
         android:id="@+id/frameLayout"
+        android:orientation="vertical"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:layout_marginStart="32dp"
@@ -48,42 +49,49 @@
 
         <TextView
             android:id="@+id/textViewQuestion"
-            android:layout_width="302dp"
+            android:layout_width="match_parent"
             android:layout_height="57dp"
             android:layout_marginStart="20dp"
             android:layout_marginTop="40dp"
             android:layout_marginEnd="20dp"
-            android:layout_marginBottom="610dp"
+            android:layout_marginBottom="0dp"
             android:text="Avec GET où sont les informations à envoyer au Serveur ?"
-            android:textAppearance="bold"
             android:textSize="15dp" />
 
         <RadioButton
             android:id="@+id/radioButtonR1"
-            android:layout_width="300dp"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="20dp"
-            android:layout_marginTop="150dp"
-            android:layout_marginEnd="222dp"
-            android:text="RadioButton" />
+            android:layout_marginTop="0dp"
+            android:layout_marginEnd="0dp"
+            android:text="1/ Dans l'entête" />
 
         <RadioButton
             android:id="@+id/radioButtonR2"
-            android:layout_width="301dp"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="20dp"
-            android:layout_marginTop="225dp"
-            android:layout_marginEnd="222dp"
-            android:text="RadioButton" />
+            android:layout_marginTop="0dp"
+            android:layout_marginEnd="0dp"
+            android:text="2/ Dans l'url" />
 
         <RadioButton
             android:id="@+id/radioButtonR3"
-            android:layout_width="301dp"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="20dp"
-            android:layout_marginTop="300dp"
-            android:layout_marginEnd="222dp"
-            android:text="RadioButton" />
-    </FrameLayout>
+            android:layout_marginTop="0dp"
+            android:layout_marginEnd="0dp"
+            android:text="3/ Dans un cookie du site" />
+
+        <Button
+            android:id="@+id/button6"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="8dp"
+            android:text="Suivant"
+            android:onClick="next"/>
+    </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
