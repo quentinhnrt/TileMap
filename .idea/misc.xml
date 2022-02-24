@@ -4,6 +4,16 @@
     <option name="filePathToZoomLevelMap">
       <map>
         <entry key="../../../../layout/custom_preview.xml" value="0.165" />
+        <entry key="..\:/Android/TileMap/app/src/main/res/drawable-v24/ic_launcher_foreground.xml" value="0.2265" />
+        <entry key="..\:/Android/TileMap/app/src/main/res/drawable/ic_launcher_background.xml" value="0.2265" />
+        <entry key="..\:/Android/TileMap/app/src/main/res/layout/activity_crossy_road.xml" value="0.22826086956521738" />
+        <entry key="..\:/Android/TileMap/app/src/main/res/layout/activity_crossyroad.xml" value="0.22826086956521738" />
+        <entry key="..\:/Android/TileMap/app/src/main/res/layout/activity_demineur.xml" value="0.22826086956521738" />
+        <entry key="..\:/Android/TileMap/app/src/main/res/layout/activity_fruitcatching.xml" value="0.22826086956521738" />
+        <entry key="..\:/Android/TileMap/app/src/main/res/layout/activity_launcher.xml" value="0.22826086956521738" />
+        <entry key="..\:/Android/TileMap/app/src/main/res/layout/activity_main.xml" value="0.22826086956521738" />
+        <entry key="..\:/Android/TileMap/app/src/main/res/layout/activity_quiz.xml" value="0.264" />
+        <entry key="..\:/Android/TileMap/app/src/main/res/mipmap-anydpi-v26/ic_launcher.xml" value="0.2265" />
         <entry key="..\:/Users/flore/AndroidStudioProjects/TileMap/app/src/main/res/layout/activity_crossyroad.xml" value="0.1" />
         <entry key="..\:/Users/flore/AndroidStudioProjects/TileMap/app/src/main/res/layout/activity_launcher.xml" value="0.13601823708206687" />
         <entry key="..\:/Users/flore/AndroidStudioProjects/TileMap/app/src/main/res/layout/activity_main.xml" value="0.1" />
