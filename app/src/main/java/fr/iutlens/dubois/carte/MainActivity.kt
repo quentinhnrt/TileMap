@@ -1,5 +1,6 @@
 package fr.iutlens.dubois.carte
 
+import android.content.Intent
 import android.graphics.Matrix
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -14,14 +15,14 @@ import fr.iutlens.dubois.carte.transform.FitTransform
 import fr.iutlens.dubois.carte.transform.FocusTransform
 import fr.iutlens.dubois.carte.utils.SpriteSheet
 import kotlin.math.abs
-
+import kotlin.reflect.KClass
 
 
 class MainActivity : AppCompatActivity() {
 
     private val map by lazy { TiledArea(R.drawable.decor, Decor(Decor.map)) }
     private val room by lazy { TiledArea(R.drawable.decor, Decor(Decor.room)) }
-    private val hero by lazy { BasicSprite(R.drawable.car, map, 8.5F, 4.5F) }
+    private val hero by lazy { BasicSprite(R.drawable.character, map, 8.5F, 3.5F) }
     private val gameView by lazy { findViewById<GameView>(R.id.gameView) }
 
 
@@ -31,7 +32,7 @@ class MainActivity : AppCompatActivity() {
 
         // Chargement des feuilles de sprites
         SpriteSheet.register(R.drawable.decor, 5, 4, this)
-        SpriteSheet.register(R.drawable.car, 3, 1, this)
+        SpriteSheet.register(R.drawable.character, 1, 1, this)
 
         // Par défaut on démarre sur la configuration map
         configMap()
@@ -47,7 +48,7 @@ class MainActivity : AppCompatActivity() {
         // Création des différents éléments à afficher dans la vue
         val list = SpriteList() // Notre liste de sprites
         for(i in 1..7){ // On crée plusieurs sprites aléatoires
-            list.add(BasicSprite(R.drawable.car, room,
+            list.add(BasicSprite(R.drawable.character, room,
                 (room.data.sizeX*Math.random()).toFloat(),
                 (room.data.sizeY*Math.random()).toFloat(),
                 (0..2).random()))
@@ -114,8 +115,9 @@ class MainActivity : AppCompatActivity() {
             dx = 0f
             dy = if (dy > 0) 1f else -1f
         }
-        hero.x += dx
-        hero.y += dy
+        if (traversable(hero.x+dx, hero.y+dy)) {
+            hero.x += dx
+            hero.y += dy}
         Log.d("onTouch","${hero.x}, ${hero.y}")
        // Toast.makeText(this,"Test",Toast.LENGTH_SHORT).show()
 
@@ -124,15 +126,27 @@ class MainActivity : AppCompatActivity() {
         true
     } else false
 
+    private fun traversable(x: Float, y: Float): Boolean {
+        val case = map.data.get(y.toInt(),x.toInt())
+        Log.d("case",case.toString())
+       return when(case){
+            /*C,8,9*/
+            2,3,7,8,11 -> true
+            else ->false
+
+        }
+
+    }
+
     private fun testCase() {
         when (hero.x to hero.y) {
-            11.5f to 1.5f -> launch("Croasy Road")
-            4.5f to 1.5f -> launch(" Crous Catching")
+            20.5f to 12.5f -> launch("Crossyroad", CrossyRoadActivity::class)
+            4.5f to 1.5f -> launch("fruitcatching", CrossyRoadActivity::class)
         }
     }
 
-    private fun launch(text: String) {
-        Toast.makeText(this, text, Toast.LENGTH_SHORT).show()
-
+    private fun<T : AppCompatActivity> launch(text: String, clazz: KClass<T>) {
+        val intent= Intent(this, clazz.java)
+        startActivity(intent)
     }
 }

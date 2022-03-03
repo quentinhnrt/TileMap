@@ -39,13 +39,13 @@ class GameView : View, View.OnTouchListener {
             // Normalement, c'est l'activité qui configure la vue
             // Chargement des feuilles de sprites
             SpriteSheet.register(R.drawable.decor, 5, 4, this.context)
-            SpriteSheet.register(R.drawable.car, 3, 1, this.context)
+            SpriteSheet.register(R.drawable.character, 1, 1, this.context)
             // Création des différents éléments à afficher dans la vue
             val tileView = TiledArea(R.drawable.decor, Decor())
             background = tileView
-            val car = BasicSprite(R.drawable.car, tileView, 3F, 8F)
-            sprite = car
-            transform = FocusTransform(this, tileView, car, 5)
+            val character = BasicSprite(R.drawable.character, tileView, 3F, 8F)
+            sprite = character
+            transform = FocusTransform(this, tileView, character, 5)
 //            transform = FitTransform(this,tileView,Matrix.ScaleToFit.CENTER)
         }
 
