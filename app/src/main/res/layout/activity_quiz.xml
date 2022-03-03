@@ -32,7 +32,7 @@
         app:layout_constraintTop_toTopOf="@+id/imageView2"
         app:layout_constraintVertical_bias="0.095" />
 
-    <LinearLayout
+    <RadioGroup
         android:id="@+id/frameLayout"
         android:layout_width="0dp"
         android:layout_height="0dp"
@@ -58,7 +58,7 @@
             android:textSize="15dp" />
 
         <RadioButton
-            android:id="@+id/radioButtonR1"
+            android:id="@+id/RadioButton1"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="20dp"
@@ -66,7 +66,7 @@
             android:text="1/ Dans l'entête" />
 
         <RadioButton
-            android:id="@+id/radioButtonR2"
+            android:id="@+id/RadioButton2"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="20dp"
@@ -74,7 +74,7 @@
             android:text="2/ Dans l'url" />
 
         <RadioButton
-            android:id="@+id/radioButtonR3"
+            android:id="@+id/RadioButton3"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="20dp"
@@ -82,7 +82,7 @@
             android:text="3/ Dans un cookie du site" />
 
         <RadioButton
-            android:id="@+id/radioButtonR4"
+            android:id="@+id/RadioButton4"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="20dp"
@@ -96,6 +96,7 @@
             android:layout_margin="8dp"
             android:onClick="next"
             android:text="Suivant" />
-    </LinearLayout>
+
+    </RadioGroup>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
