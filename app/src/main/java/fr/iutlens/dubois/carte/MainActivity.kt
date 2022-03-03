@@ -174,7 +174,7 @@ class MainActivity : AppCompatActivity() {
   //  }
 
     private fun traversable(x: Float, y: Float): Boolean {
-        val case = map.data.get(y.toInt(),x.toInt())
+        val case = map.data.get(x.toInt(),y.toInt())
         Log.d("case",case.toString())
        return when(case){
             /*C,8,9*/
@@ -189,6 +189,8 @@ class MainActivity : AppCompatActivity() {
         when (hero.x to hero.y) {
             20.5f to 12.5f -> launch("Crossyroad", CrossyRoadActivity::class)
             14.5f to 3.5f -> launch("fruitcatching", FruitActivity::class)
+            17.5f to 1.5f -> launch("demineur", DemineurActivity::class)
+
         }
     }
 
