@@ -187,9 +187,22 @@ class MainActivity : AppCompatActivity() {
 
     private fun testCase() {
         when (hero.x to hero.y) {
-            20.5f to 12.5f -> launch("Crossyroad", CrossyRoadActivity::class)
-            14.5f to 3.5f -> launch("fruitcatching", FruitActivity::class)
-            17.5f to 1.5f -> launch("demineur", DemineurActivity::class)
+            20.5f to 12.5f -> door("crossyState")
+            14.5f to 3.5f -> launch("Coffecatching", FruitActivity::class)
+            17.5f to 1.5f -> door("demineurState")
+
+        }
+    }
+
+    private fun door(name: String){
+       val session = getSharedPreferences("Session", Context.MODE_PRIVATE) ?: return
+        var gameState = session.getInt(name, 0)
+        if(gameState == 0){
+            when(name){
+                "crossyState" -> launch(name, CrossyRoadActivity::class)
+                "demineurState" -> launch("demineur", DemineurActivity::class)
+
+            }
 
         }
     }
