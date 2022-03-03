@@ -56,15 +56,22 @@ class MineMap( override val sizeX: Int, override val sizeY: Int) : TileMap {
                 }
             }
             if (tile_value != 0) {
-                for (i in 0..2) {
-                    for (j in 0..2) {
-                        if (validTile(tile_x+j-1, tile_y+i-1)) {
-                            displayGrid[tile_y+i-1][tile_x+j-1] = tile_value + 3
-                            demineurGrid[tile_y+i-1][tile_x+j-1] = tile_value + 3
+                demineurGrid[tile_y][tile_x] = tile_value
+                displayGrid[tile_y][tile_x] = tile_value
+                val neighbours = arrayOf(-1,0,1)
+                for (i in neighbours) {
+                    for (j in neighbours) {
+                        if (validTile(tile_x+j, tile_y+i)) {
+                            //displayGrid[tile_y+i][tile_x+j] = tile_value + 3
+                            if (i != j) {
+                                demineurGrid[tile_y + i][tile_x + j] = tile_value + 3
+                            }
+                            else if (i !=0) {
+                                demineurGrid[tile_y + i][tile_x + j] = tile_value + 3
+                            }
                         }
                     }
                 }
-                demineurGrid[tile_y][tile_x] = tile_value
             }
         }
     }
@@ -81,5 +88,14 @@ class MineMap( override val sizeX: Int, override val sizeY: Int) : TileMap {
             showSpace(x.toInt(),y.toInt())
         }
         displayGrid[y.toInt()][x.toInt()] = tile_value
+    }
+    fun flag(x: Float, y: Float) {
+        var display_value = displayGrid[y.toInt()][x.toInt()]
+        when (display_value) {
+            0 -> display_value = 17
+            17, 18 -> display_value++
+            19 -> display_value = 0
+        }
+        displayGrid[y.toInt()][x.toInt()] = display_value
     }
 }
