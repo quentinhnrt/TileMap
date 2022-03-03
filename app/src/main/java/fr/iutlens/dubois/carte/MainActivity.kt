@@ -24,7 +24,7 @@ class MainActivity : AppCompatActivity() {
 
     private val map by lazy { TiledArea(R.drawable.decor, Decor(Decor.map)) }
     private val room by lazy { TiledArea(R.drawable.decor, Decor(Decor.room)) }
-    private val hero by lazy { BasicSprite(R.drawable.character, map, 8.5F, 3.5F) }
+    private val hero by lazy { BasicSprite(R.drawable.character, map, 20.5F, 11.5F) }
     private val gameView by lazy { findViewById<GameView>(R.id.gameView) }
     private val vieText by lazy { findViewById<TextView>(R.id.vie) }
     private val scoreText by lazy { findViewById<TextView>(R.id.score) }
@@ -47,6 +47,7 @@ class MainActivity : AppCompatActivity() {
         findViewById<Button>(R.id.buttonMap).setOnClickListener { reset() }
         findViewById<Button>(R.id.buttonDrag).setOnClickListener { configDrag() }
 
+
         val session = getPreferences(Context.MODE_PRIVATE) ?: return
         val score = session.getInt("score", 0)
         val vie = session.getInt("vie", 5)
@@ -55,10 +56,6 @@ class MainActivity : AppCompatActivity() {
         scoreText.text = score.toString()
 
 
-
-
-
-        
     }
 
     private fun reset() {
@@ -84,6 +81,8 @@ class MainActivity : AppCompatActivity() {
         vieText.text = vie.toString()
         scoreText.text = score.toString()
     }
+
+
 
 
     private fun configDrag() {
@@ -168,8 +167,14 @@ class MainActivity : AppCompatActivity() {
         true
     } else false
 
+    //override fun onResume() {
+     //   super.onResume()
+     //   val sharedPref = getPreferences(Context.MODE_PRIVATE) ?: return
+    //    val x = sharedPref.getInt("", "")
+  //  }
+
     private fun traversable(x: Float, y: Float): Boolean {
-        val case = map.data.get(y.toInt(),x.toInt())
+        val case = map.data.get(x.toInt(),y.toInt())
         Log.d("case",case.toString())
        return when(case){
             /*C,8,9*/
@@ -183,7 +188,9 @@ class MainActivity : AppCompatActivity() {
     private fun testCase() {
         when (hero.x to hero.y) {
             20.5f to 12.5f -> launch("Crossyroad", CrossyRoadActivity::class)
-            4.5f to 1.5f -> launch("fruitcatching", CrossyRoadActivity::class)
+            14.5f to 3.5f -> launch("fruitcatching", FruitActivity::class)
+            17.5f to 1.5f -> launch("demineur", DemineurActivity::class)
+
         }
     }
 
