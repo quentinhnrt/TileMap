@@ -52,11 +52,13 @@ class DemineurActivity : AppCompatActivity() {
             }
             MotionEvent.ACTION_MOVE -> true
             MotionEvent.ACTION_UP -> {
-                if (System.currentTimeMillis()-touchTimestamp > 1000) {
-                    Toast.makeText(applicationContext, "clic long",  Toast.LENGTH_SHORT).show()
+                if (System.currentTimeMillis()-touchTimestamp > 500) {
+                    //Toast.makeText(applicationContext, "clic long",  Toast.LENGTH_SHORT).show()
+                    mineMap.flag(point[0]/map.w,point[1]/map.h)
                 }
-
-                mineMap.show(point[0]/map.w,point[1]/map.h)
+                else {
+                    mineMap.show(point[0] / map.w, point[1] / map.h)
+                }
                 gameView.invalidate()
                 true
             }
