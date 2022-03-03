@@ -1,5 +1,6 @@
 package fr.iutlens.dubois.carte
 
+import android.content.Context
 import android.content.Intent
 import android.graphics.Matrix
 import androidx.appcompat.app.AppCompatActivity
@@ -40,8 +41,11 @@ class MainActivity : AppCompatActivity() {
         // On définit les actions des boutons
         findViewById<Button>(R.id.buttonMap).setOnClickListener { configMap() }
         findViewById<Button>(R.id.buttonDrag).setOnClickListener { configDrag() }
+
         
     }
+
+
 
 
     private fun configDrag() {
@@ -125,6 +129,12 @@ class MainActivity : AppCompatActivity() {
         gameView.invalidate()
         true
     } else false
+
+    //override fun onResume() {
+     //   super.onResume()
+     //   val sharedPref = getPreferences(Context.MODE_PRIVATE) ?: return
+    //    val x = sharedPref.getInt("", "")
+  //  }
 
     private fun traversable(x: Float, y: Float): Boolean {
         val case = map.data.get(y.toInt(),x.toInt())
