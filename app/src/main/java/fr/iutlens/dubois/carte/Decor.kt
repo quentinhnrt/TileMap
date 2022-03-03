@@ -7,7 +7,7 @@ import fr.iutlens.dubois.carte.sprite.TileMap
  */
 class Decor(dataSrc: Array<String>? = null) : TileMap {
 
-    private val DIGITS = "123456789ABCDEFGHIJKL"
+    private val DIGITS = "123456789ABCDEFGHIJKL0"
 
     private val data: List<List<Int>> =  (dataSrc ?: map).map { line -> line.map { c -> DIGITS.indexOf(c) } }
 
@@ -18,6 +18,15 @@ class Decor(dataSrc: Array<String>? = null) : TileMap {
 
 
     companion object {
+        val mine = arrayOf(
+            "10020",
+            "00000",
+            "01000",
+            "00000",
+            "00031",
+
+        )
+
          val room = arrayOf(
             "1222232222225",
             "677778777777A",
