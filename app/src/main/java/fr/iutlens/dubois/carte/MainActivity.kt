@@ -1,5 +1,6 @@
 package fr.iutlens.dubois.carte
 
+import android.content.Context
 import android.content.Intent
 import android.graphics.Matrix
 import androidx.appcompat.app.AppCompatActivity
@@ -7,6 +8,7 @@ import android.os.Bundle
 import android.util.Log
 import android.view.MotionEvent
 import android.widget.Button
+import android.widget.TextView
 import android.widget.Toast
 import fr.iutlens.dubois.carte.sprite.BasicSprite
 import fr.iutlens.dubois.carte.sprite.SpriteList
@@ -24,6 +26,10 @@ class MainActivity : AppCompatActivity() {
     private val room by lazy { TiledArea(R.drawable.decor, Decor(Decor.room)) }
     private val hero by lazy { BasicSprite(R.drawable.character, map, 8.5F, 3.5F) }
     private val gameView by lazy { findViewById<GameView>(R.id.gameView) }
+    private val vieText by lazy { findViewById<TextView>(R.id.vie) }
+    private val scoreText by lazy { findViewById<TextView>(R.id.score) }
+
+
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -38,9 +44,45 @@ class MainActivity : AppCompatActivity() {
         configMap()
 
         // On définit les actions des boutons
-        findViewById<Button>(R.id.buttonMap).setOnClickListener { configMap() }
+        findViewById<Button>(R.id.buttonMap).setOnClickListener { reset() }
         findViewById<Button>(R.id.buttonDrag).setOnClickListener { configDrag() }
+
+        val session = getPreferences(Context.MODE_PRIVATE) ?: return
+        val score = session.getInt("score", 0)
+        val vie = session.getInt("vie", 5)
+
+        vieText.text = vie.toString()
+        scoreText.text = score.toString()
+
+
+
+
+
         
+    }
+
+    private fun reset() {
+        val session = getSharedPreferences("Session", Context.MODE_PRIVATE) ?: return
+        val score = session.getInt("score", 0)
+        val vie = session.getInt("vie", 5)
+        with(session.edit()){
+            putInt("vie", 5)
+            putInt("score", 0)
+            apply()
+        }
+        vieText.text = vie.toString()
+        scoreText.text = score.toString()
+    }
+
+    override fun onRestart() {
+        super.onRestart()
+
+        val session = getSharedPreferences("Session",Context.MODE_PRIVATE) ?: return
+        val score = session.getInt("score", 0)
+        val vie = session.getInt("vie", 5)
+
+        vieText.text = vie.toString()
+        scoreText.text = score.toString()
     }
 
 
