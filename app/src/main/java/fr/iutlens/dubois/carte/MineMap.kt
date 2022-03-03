@@ -41,7 +41,37 @@ class MineMap( override val sizeX: Int, override val sizeY: Int) : TileMap {
             }
         }
     }
-    fun showSpace(x: Int, y: Int) {
+
+    fun showSpace(x: Int, y: Int){
+
+
+        if (demineurGrid[y][x] != 0) return //garantis pas de mine voisine
+        if (displayGrid[y][x] !=0 ) return //case pas encore visible
+
+        displayGrid[y][x] = 1
+
+        for (i in x-1..x+1)
+            for (j in y-1..y+1){
+                if (validTile(i,j))
+                    showSpace(i,j)
+            }
+
+
+
+        for (i in x-1..x+1)
+            for (j in y-1..y+1){
+                if (validTile(i,j)&&displayGrid[j][i] ==0 && demineurGrid[j][i] != 0)
+                    displayGrid[j][i] = demineurGrid[j][i]
+            }
+
+
+        // Si case vide
+        // alors visiter tous les voisins vide (composante connexe)
+
+        // montrer la case et ses voisins directs (si nécessaires)
+    }
+
+    fun showSpaceOld(x: Int, y: Int) {
         var check_up = 1
         var check_down = 1
         var check_left = 1
@@ -128,13 +158,18 @@ class MineMap( override val sizeX: Int, override val sizeY: Int) : TileMap {
     override fun get(x: Int, y: Int): Int {
         return displayGrid[y][x]
     }
-    fun show(x: Float, y: Float) {
+    fun show(x: Float, y: Float): Int {
         var tile_value = demineurGrid[y.toInt()][x.toInt()]
+        var loseMod = 0
         if (tile_value == 0) {
             tile_value = 1
             showSpace(x.toInt(),y.toInt())
         }
+        if (tile_value == 2 || tile_value == 3 || tile_value == 4){
+            loseMod = 1
+        }
         displayGrid[y.toInt()][x.toInt()] = tile_value
+        return loseMod
     }
     fun flag(x: Float, y: Float) {
         var display_value = displayGrid[y.toInt()][x.toInt()]
