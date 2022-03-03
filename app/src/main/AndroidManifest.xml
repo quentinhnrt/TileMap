@@ -13,7 +13,7 @@
             android:name=".FruitActivity"
             android:exported="false" />
         <activity
-            android:name=".quiz"
+            android:name=".Quiz"
             android:exported="false" />
         <activity
             android:name=".Demineur"
