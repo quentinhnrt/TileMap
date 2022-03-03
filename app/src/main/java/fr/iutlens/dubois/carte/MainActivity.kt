@@ -151,7 +151,7 @@ class MainActivity : AppCompatActivity() {
     private fun testCase() {
         when (hero.x to hero.y) {
             20.5f to 12.5f -> launch("Crossyroad", CrossyRoadActivity::class)
-            4.5f to 1.5f -> launch("fruitcatching", CrossyRoadActivity::class)
+            14.5f to 3.5f -> launch("fruitcatching", FruitActivity::class)
         }
     }
 
