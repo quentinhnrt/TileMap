@@ -29,7 +29,7 @@ class LauncherActivity : AppCompatActivity() {
         startActivity(intent)
     }
     fun Demineur(view: android.view.View) {
-        val intent=Intent(this, Crossyroad::class.java)
+        val intent=Intent(this, DemineurActivity::class.java)
         startActivity(intent)
     }
     fun Quiz(view: android.view.View) {

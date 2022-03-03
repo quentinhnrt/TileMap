@@ -16,7 +16,7 @@
             android:name=".quiz"
             android:exported="false" />
         <activity
-            android:name=".Demineur"
+            android:name=".DemineurActivity"
             android:exported="false" />
         <activity
             android:name=".CrossyRoadActivity"
