@@ -23,7 +23,7 @@ class MainActivity : AppCompatActivity() {
 
     private val map by lazy { TiledArea(R.drawable.decor, Decor(Decor.map)) }
     private val room by lazy { TiledArea(R.drawable.decor, Decor(Decor.room)) }
-    private val hero by lazy { BasicSprite(R.drawable.character, map, 8.5F, 3.5F) }
+    private val hero by lazy { BasicSprite(R.drawable.character, map, 20.5F, 11.5F) }
     private val gameView by lazy { findViewById<GameView>(R.id.gameView) }
 
 
