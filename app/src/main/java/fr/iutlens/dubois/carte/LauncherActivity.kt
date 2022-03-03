@@ -12,6 +12,7 @@ class LauncherActivity : AppCompatActivity() {
 
         SpriteSheet.register(R.drawable.road, 5, 4, this)
         SpriteSheet.register(R.drawable.character64, 1, 1, this)
+        SpriteSheet.register(R.drawable.fruit, 1, 1, this)
     }
 
     fun main(view: android.view.View) {
@@ -20,7 +21,7 @@ class LauncherActivity : AppCompatActivity() {
     }
 
     fun Fruit(view: android.view.View) {
-        val intent=Intent(this, fruitcatching::class.java)
+        val intent=Intent(this, FruitActivity::class.java)
         startActivity(intent)}
 
     fun Crossy(view: android.view.View) {
