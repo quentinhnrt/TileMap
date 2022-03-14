@@ -10,6 +10,7 @@ import android.view.MotionEvent
 import android.widget.Button
 import android.widget.TextView
 import android.widget.Toast
+import fr.iutlens.dubois.carte.sprite.AnimatedSprite
 import fr.iutlens.dubois.carte.sprite.BasicSprite
 import fr.iutlens.dubois.carte.sprite.SpriteList
 import fr.iutlens.dubois.carte.sprite.TiledArea
@@ -24,7 +25,7 @@ class MainActivity : AppCompatActivity() {
 
     private val map by lazy { TiledArea(R.drawable.decor, Decor(Decor.map)) }
     private val room by lazy { TiledArea(R.drawable.decor, Decor(Decor.room)) }
-    private val hero by lazy { BasicSprite(R.drawable.character, map, 20.5F, 11.5F) }
+    private val hero by lazy { AnimatedSprite(R.drawable.charactero, map, 8.5F, 3.5F) }
     private val gameView by lazy { findViewById<GameView>(R.id.gameView) }
     private val vieText by lazy { findViewById<TextView>(R.id.vie) }
     private val scoreText by lazy { findViewById<TextView>(R.id.score) }
@@ -38,7 +39,7 @@ class MainActivity : AppCompatActivity() {
 
         // Chargement des feuilles de sprites
         SpriteSheet.register(R.drawable.decor, 5, 4, this)
-        SpriteSheet.register(R.drawable.character, 1, 1, this)
+        SpriteSheet.register(R.drawable.charactero, 16, 1, this)
 
         // Par défaut on démarre sur la configuration map
         configMap()
@@ -157,8 +158,10 @@ class MainActivity : AppCompatActivity() {
             dy = if (dy > 0) 1f else -1f
         }
         if (traversable(hero.x+dx, hero.y+dy)) {
-            hero.x += dx
-            hero.y += dy}
+            hero.move(dx,dy);
+            //hero.x += dx
+            //hero.y += dy
+        }
         Log.d("onTouch","${hero.x}, ${hero.y}")
        // Toast.makeText(this,"Test",Toast.LENGTH_SHORT).show()
 
