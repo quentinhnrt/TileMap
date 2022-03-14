@@ -34,7 +34,7 @@ class LauncherActivity : AppCompatActivity() {
         startActivity(intent)
     }
     fun Quiz(view: android.view.View) {
-        val intent=Intent(this, Crossyroad::class.java)
+        val intent=Intent(this, Quiz::class.java)
         startActivity(intent)
     }
 
