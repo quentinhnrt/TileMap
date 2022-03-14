@@ -1,10 +1,12 @@
 package fr.iutlens.dubois.carte
 
+import android.content.Context
 import android.graphics.Matrix
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
+import android.provider.Settings.Global.putInt
 import android.util.Log
 import android.view.MotionEvent
 import android.view.View
@@ -17,6 +19,7 @@ import fr.iutlens.dubois.carte.transform.FocusTransform
 import fr.iutlens.dubois.carte.utils.SpriteSheet
 import kotlin.math.abs
 import kotlin.math.roundToInt
+
 
 class DemineurActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -33,6 +36,7 @@ class DemineurActivity : AppCompatActivity() {
     private val mineMap = MineMap(10,20)
     private val map by lazy { TiledArea(R.drawable.demineur, mineMap) }
     private val gameView by lazy { findViewById<GameView>(R.id.gameView) }
+    private var lose = 0
     private fun configMap() {
         gameView.apply {
             background = map
@@ -54,10 +58,43 @@ class DemineurActivity : AppCompatActivity() {
             MotionEvent.ACTION_UP -> {
                 if (System.currentTimeMillis()-touchTimestamp > 500) {
                     //Toast.makeText(applicationContext, "clic long",  Toast.LENGTH_SHORT).show()
-                    mineMap.flag(point[0]/map.w,point[1]/map.h)
+                    var winMod = mineMap.flag(point[0]/map.w,point[1]/map.h)
+                    if (winMod == 1) {
+                        val session = this.getSharedPreferences("Session", Context.MODE_PRIVATE)
+                        var score = session.getInt("score", 0)
+                        var note = when(lose){
+                            0 -> 20
+                            1 -> 15
+                            2 -> 10
+                            else -> 0
+                        }
+                        with(session.edit()) {
+                            putInt("demineurState", 1)
+                            putInt("demineurNote", note)
+                            putInt("score", score + note)
+                            apply()
+                        }
+                        //var state = session.getInt("demineurState", 0)
+                        //Log.d("osecour", state.toString())
+                        finish()
+                    }
                 }
                 else {
-                    mineMap.show(point[0] / map.w, point[1] / map.h)
+                    var loseMod = mineMap.show(point[0] / map.w, point[1] / map.h)
+                    lose += loseMod
+                    if(lose == 3){
+                        val session = this.getSharedPreferences("Session", Context.MODE_PRIVATE)
+
+                        with(session.edit()) {
+                            putInt("demineurState", 1)
+                            putInt("demineurNote", 0)
+                           // putInt("score", [score+valeur])
+                            apply()
+                        }
+                        //var state = session.getInt("demineurState", 0)
+                        //Log.d("osecour", state.toString())
+                        finish()
+                    }
                 }
                 gameView.invalidate()
                 true
