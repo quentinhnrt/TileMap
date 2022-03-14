@@ -1,7 +1,9 @@
 package fr.iutlens.dubois.carte
 
 
+import android.content.Context
 import android.os.Bundle
+import android.util.Log
 import android.view.MotionEvent
 import androidx.appcompat.app.AppCompatActivity
 
@@ -19,7 +21,8 @@ class CrossyRoadActivity : AppCompatActivity(), TimerAction {
     private val tab = Decor.crossy
     private val beginX = hero.x
     private val beginY = hero.y
-    private var timer : RefreshHandler?= null;
+    private var timer: RefreshHandler? = null;
+    private var lose = 0;
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -27,23 +30,48 @@ class CrossyRoadActivity : AppCompatActivity(), TimerAction {
         setContentView(R.layout.activity_crossy_road)
         // Chargement des feuilles de sprites
 
-    timer = RefreshHandler(this)
+        timer = RefreshHandler(this)
         timer?.scheduleRefresh(500)
 
         gameView.apply {
             background = theRoad
             sprite = hero
-            transform = FocusTransform(this, theRoad, hero,12)
+            transform = FocusTransform(this, theRoad, hero, 12)
         }
         gameView.onTouch = this::onTouchMap
         gameView.invalidate()
 
-            //        Timer("toY").schedule(0, 500) {
+        //        Timer("toY").schedule(0, 500) {
 
+
+        val session = getSharedPreferences("Session", Context.MODE_PRIVATE) ?: return
+        var vie = session.getInt("vie", 5)
+        with(session.edit()){
+            putInt("vie", vie-1)
+            apply()
+        }
     }
 
     private fun win() {
         timer = null
+        val note = when (lose) {
+            0 -> 20
+            1 -> 15
+            2 -> 10
+            else -> {
+                0
+            }
+        }
+
+        val session = this.getSharedPreferences("Session", Context.MODE_PRIVATE) ?: return
+        var score = session.getInt("score", 0)
+        with(session.edit()) {
+            putInt("crossyState", 1)
+            putInt("crossyNote", note)
+            putInt("score", score + note)
+            apply()
+        }
+
         finish()
 //        val intent= Intent(this, MainActivity::class.java)
 //        startActivity(intent)
@@ -74,14 +102,27 @@ class CrossyRoadActivity : AppCompatActivity(), TimerAction {
         true
     } else false
 
-    private fun gameOver(){
-        hero.x = beginX
-        hero.y = beginY
+    private fun gameOver() {
+        if (lose < 3) {
+            lose += 1
+            hero.x = beginX
+            hero.y = beginY
+        } else {
+            val session = getSharedPreferences("Session", Context.MODE_PRIVATE) ?: return
+            var vie = session.getInt("vie", 5)
+            with(session.edit()) {
+                putInt("crossyState", 1)
+                putInt("crossyNote", 0)
+                putInt("vie", vie - 1)
+                apply()
+            }
+            finish()
+        }
 
     }
 
     override fun update() {
-        if (timer==null) return
+        if (timer == null) return
 
         timer?.scheduleRefresh(300)
         val y = hero.y
@@ -91,9 +132,6 @@ class CrossyRoadActivity : AppCompatActivity(), TimerAction {
 
         hero.y += 1f
         gameView.invalidate()
-
-
-
 
 
     }

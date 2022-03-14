@@ -7,17 +7,26 @@ import fr.iutlens.dubois.carte.sprite.TileMap
  */
 class Decor(dataSrc: Array<String>? = null) : TileMap {
 
-    private val DIGITS = "123456789ABCDEFGHIJKL"
+    private val DIGITS = "123456789ABCDEFGHIJKL0"
 
     private val data: List<List<Int>> =  (dataSrc ?: map).map { line -> line.map { c -> DIGITS.indexOf(c) } }
 
-    override operator fun get(i: Int, j: Int): Int { return data[i][j] }
+    override operator fun get(i: Int, j: Int): Int { return data[j][i] }
 
-    override val sizeY = data[0].size
-    override val sizeX = data.size
+    override val sizeX = data[0].size
+    override val sizeY = data.size
 
 
     companion object {
+        val mine = arrayOf(
+            "10020",
+            "00000",
+            "01000",
+            "00000",
+            "00031",
+
+        )
+
          val room = arrayOf(
             "1222232222225",
             "677778777777A",
