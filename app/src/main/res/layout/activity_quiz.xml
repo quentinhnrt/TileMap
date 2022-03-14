@@ -19,11 +19,12 @@
 
     <TextView
         android:id="@+id/textView"
-        android:layout_width="170dp"
-        android:layout_height="56dp"
+        android:layout_width="342dp"
+        android:layout_height="49dp"
         android:background="@color/white"
         android:text="QUIZ : EASY"
         android:textAlignment="center"
+        android:paddingTop="10dp"
         android:textAppearance="@style/TextAppearance.AppCompat.Large"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -34,27 +35,31 @@
 
     <RadioGroup
         android:id="@+id/frameLayout"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
+        android:layout_width="329dp"
+        android:layout_height="445dp"
         android:layout_marginStart="32dp"
         android:layout_marginTop="150dp"
         android:layout_marginEnd="32dp"
         android:layout_marginBottom="32dp"
         android:background="@color/white"
         android:orientation="vertical"
+        android:padding="10dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.168">
 
         <TextView
             android:id="@+id/textViewQuestion"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="20dp"
-            android:layout_marginTop="40dp"
+            android:layout_marginTop="20dp"
             android:layout_marginEnd="20dp"
+            android:padding="10dp"
             android:text="Avec GET où sont les informations à envoyer au Serveur ?"
+            android:textColor="@color/black"
             android:textSize="15dp" />
 
         <RadioButton
@@ -62,40 +67,56 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="20dp"
+            android:layout_marginTop="10dp"
             android:layout_marginEnd="0dp"
-            android:text="1/ Dans l'entête" />
+            android:padding="10dp"
+            android:text="1/ Dans l'entête"
+            android:textColor="@color/black" />
 
         <RadioButton
             android:id="@+id/RadioButton2"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="20dp"
+            android:layout_marginTop="10dp"
             android:layout_marginEnd="0dp"
-            android:text="2/ Dans l'url" />
+            android:padding="10dp"
+            android:text="2/ Dans l'url"
+            android:textColor="@color/black" />
 
         <RadioButton
             android:id="@+id/RadioButton3"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="20dp"
+            android:layout_marginTop="10dp"
             android:layout_marginEnd="0dp"
-            android:text="3/ Dans un cookie du site" />
+            android:padding="10dp"
+            android:text="3/ Dans un cookie du site"
+            android:textColor="@color/black" />
 
         <RadioButton
             android:id="@+id/RadioButton4"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="20dp"
+            android:layout_marginTop="10dp"
             android:layout_marginEnd="0dp"
-            android:text="4/ Option Text" />
+            android:padding="10dp"
+            android:text="4/ Option Text"
+            android:textColor="@color/black" />
 
         <Button
             android:id="@+id/button6"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_margin="8dp"
+            android:layout_marginTop="10dp"
+            android:minHeight="48dp"
             android:onClick="next"
-            android:text="Suivant" />
+            android:padding="10dp"
+            android:text="Suivant"
+            android:textColor="@color/white"
+            tools:ignore="TouchTargetSizeCheck,TouchTargetSizeCheck,TouchTargetSizeCheck" />
 
     </RadioGroup>
 
