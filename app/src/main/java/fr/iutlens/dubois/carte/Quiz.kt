@@ -1,5 +1,6 @@
 package fr.iutlens.dubois.carte
 
+import android.content.Context
 import android.os.Bundle
 import android.util.Log
 import android.view.View
@@ -23,14 +24,18 @@ class Quiz : AppCompatActivity() {
             "Quel est le numéro de salle de l'Amphi ?", "1/ 00 F", "2/Il n'y en a pas", "3/ 05 F", "4/ 666 F"),
         arrayOf(
             "Est-ce que MMI c'est génial ?",
-            "1/ Oui", "2/ Non","Bof" ,"Drip")
+            "1/ Oui", "2/ Non","Bof" ,"Drip", "Peut être")
     )
 
     val r1 = arrayOf(2, 3, 1, 2, 1)
 
-    val id = arrayOf(R.id.textViewQuestion, R.id.RadioButton1,R.id.RadioButton2,R.id.RadioButton3,R.id.RadioButton4)
+    private var lose: Int = 0
 
-    private var nQuestion = 0
+    private var note: Int = 0
+
+    private var nQuestion = 1
+
+    val id = arrayOf(R.id.textViewQuestion, R.id.RadioButton1,R.id.RadioButton2,R.id.RadioButton3,R.id.RadioButton4)
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -38,21 +43,40 @@ class Quiz : AppCompatActivity() {
         loadQ(nQuestion)
     }
 
-
-
-    private var note: Int = 0
-
     fun next(view: View) {
         //val question: TextView = findViewById(R.id.textViewQuestion)
         val RadioButton = findViewById<RadioButton>(id[r1[nQuestion]])
         if (RadioButton.isChecked) {
             note++
         }
-        Log.d("score", note.toString())
+        else {
+            lose++
+        }
 
         nQuestion++
-        loadQ(nQuestion)
 
+        if (nQuestion >= q1.size) {
+            val session = this.getSharedPreferences("Session", Context.MODE_PRIVATE) ?: return
+            var score = session.getInt("score", 0)
+            var noteQuizz = when(lose){
+                1 -> 15
+                2 -> 10
+                3 -> 5
+                4,5 -> 0
+
+                else -> 0
+            }
+            with(session.edit()) {
+                putInt("quizzState", 1)
+                putInt("quizzNote", noteQuizz)
+                putInt("score", score + noteQuizz)
+                apply()
+            }
+            finish()
+
+        } else {
+            loadQ(nQuestion)
+        }
     }
 
     private fun loadQ(n: Int) {
