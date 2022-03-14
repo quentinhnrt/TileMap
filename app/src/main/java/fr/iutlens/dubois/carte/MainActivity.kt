@@ -177,6 +177,8 @@ class MainActivity : AppCompatActivity() {
   //  }
 
     private fun traversable(x: Float, y: Float): Boolean {
+        if ((x+1).toInt()-1 !in 0 until map.data.sizeX) return false
+        if ((y+1).toInt()-1 !in 0 until map.data.sizeY) return false
         val case = map.data.get(x.toInt(),y.toInt())
         Log.d("case",case.toString())
        return when(case){
