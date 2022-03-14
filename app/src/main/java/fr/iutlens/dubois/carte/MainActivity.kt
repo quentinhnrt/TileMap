@@ -44,8 +44,8 @@ class MainActivity : AppCompatActivity() {
         configMap()
 
         // On définit les actions des boutons
-        findViewById<Button>(R.id.buttonMap).setOnClickListener { reset() }
-        findViewById<Button>(R.id.buttonDrag).setOnClickListener { configDrag() }
+       // findViewById<Button>(R.id.buttonMap).setOnClickListener { reset() }
+     //   findViewById<Button>(R.id.buttonDrag).setOnClickListener { configDrag() }
 
 
         val session = getPreferences(Context.MODE_PRIVATE) ?: return
@@ -188,8 +188,9 @@ class MainActivity : AppCompatActivity() {
     private fun testCase() {
         when (hero.x to hero.y) {
             20.5f to 12.5f -> door("crossyState")
-            14.5f to 3.5f -> launch("Coffecatching", FruitActivity::class)
+            14.5f to 3.5f -> door("fruitState")
             17.5f to 1.5f -> door("demineurState")
+           // 11.5f to 1.5f -> door("quizState")
 
         }
     }
@@ -200,7 +201,9 @@ class MainActivity : AppCompatActivity() {
         if(gameState == 0){
             when(name){
                 "crossyState" -> launch(name, CrossyRoadActivity::class)
-                "demineurState" -> launch("demineur", DemineurActivity::class)
+                "demineurState" -> launch(name, DemineurActivity::class)
+                "fruitState" -> launch(name, FruitActivity::class)
+                //"quizState" -> launch(name, QuizActivity::class)
 
             }
 
