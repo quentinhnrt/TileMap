@@ -1,5 +1,6 @@
 package fr.iutlens.dubois.carte
 
+import android.content.Context
 import android.content.Intent
 import android.graphics.Matrix
 import androidx.appcompat.app.AppCompatActivity
@@ -7,7 +8,9 @@ import android.os.Bundle
 import android.util.Log
 import android.view.MotionEvent
 import android.widget.Button
+import android.widget.TextView
 import android.widget.Toast
+import fr.iutlens.dubois.carte.sprite.AnimatedSprite
 import fr.iutlens.dubois.carte.sprite.BasicSprite
 import fr.iutlens.dubois.carte.sprite.SpriteList
 import fr.iutlens.dubois.carte.sprite.TiledArea
@@ -22,8 +25,12 @@ class MainActivity : AppCompatActivity() {
 
     private val map by lazy { TiledArea(R.drawable.decor, Decor(Decor.map)) }
     private val room by lazy { TiledArea(R.drawable.decor, Decor(Decor.room)) }
-    private val hero by lazy { BasicSprite(R.drawable.character, map, 8.5F, 3.5F) }
+    private val hero by lazy { AnimatedSprite(R.drawable.charactero, map, 8.5F, 3.5F) }
     private val gameView by lazy { findViewById<GameView>(R.id.gameView) }
+    private val vieText by lazy { findViewById<TextView>(R.id.vie) }
+    private val scoreText by lazy { findViewById<TextView>(R.id.score) }
+
+
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -32,16 +39,51 @@ class MainActivity : AppCompatActivity() {
 
         // Chargement des feuilles de sprites
         SpriteSheet.register(R.drawable.decor, 5, 4, this)
-        SpriteSheet.register(R.drawable.character, 1, 1, this)
+        SpriteSheet.register(R.drawable.charactero, 16, 1, this)
 
         // Par défaut on démarre sur la configuration map
         configMap()
 
         // On définit les actions des boutons
-        findViewById<Button>(R.id.buttonMap).setOnClickListener { configMap() }
-        findViewById<Button>(R.id.buttonDrag).setOnClickListener { configDrag() }
-        
+       // findViewById<Button>(R.id.buttonMap).setOnClickListener { reset() }
+     //   findViewById<Button>(R.id.buttonDrag).setOnClickListener { configDrag() }
+
+
+        val session = getPreferences(Context.MODE_PRIVATE) ?: return
+        val score = session.getInt("score", 0)
+        val vie = session.getInt("vie", 5)
+
+        vieText.text = vie.toString()
+        scoreText.text = score.toString()
+
+
     }
+
+    private fun reset() {
+        val session = getSharedPreferences("Session", Context.MODE_PRIVATE) ?: return
+        val score = session.getInt("score", 0)
+        val vie = session.getInt("vie", 5)
+        with(session.edit()){
+            putInt("vie", 5)
+            putInt("score", 0)
+            apply()
+        }
+        vieText.text = vie.toString()
+        scoreText.text = score.toString()
+    }
+
+    override fun onRestart() {
+        super.onRestart()
+
+        val session = getSharedPreferences("Session",Context.MODE_PRIVATE) ?: return
+        val score = session.getInt("score", 0)
+        val vie = session.getInt("vie", 5)
+
+        vieText.text = vie.toString()
+        scoreText.text = score.toString()
+    }
+
+
 
 
     private fun configDrag() {
@@ -116,8 +158,10 @@ class MainActivity : AppCompatActivity() {
             dy = if (dy > 0) 1f else -1f
         }
         if (traversable(hero.x+dx, hero.y+dy)) {
-            hero.x += dx
-            hero.y += dy}
+            hero.move(dx,dy);
+            //hero.x += dx
+            //hero.y += dy
+        }
         Log.d("onTouch","${hero.x}, ${hero.y}")
        // Toast.makeText(this,"Test",Toast.LENGTH_SHORT).show()
 
@@ -126,8 +170,14 @@ class MainActivity : AppCompatActivity() {
         true
     } else false
 
+    //override fun onResume() {
+     //   super.onResume()
+     //   val sharedPref = getPreferences(Context.MODE_PRIVATE) ?: return
+    //    val x = sharedPref.getInt("", "")
+  //  }
+
     private fun traversable(x: Float, y: Float): Boolean {
-        val case = map.data.get(y.toInt(),x.toInt())
+        val case = map.data.get(x.toInt(),y.toInt())
         Log.d("case",case.toString())
        return when(case){
             /*C,8,9*/
@@ -140,8 +190,29 @@ class MainActivity : AppCompatActivity() {
 
     private fun testCase() {
         when (hero.x to hero.y) {
-            20.5f to 12.5f -> launch("Crossyroad", CrossyRoadActivity::class)
-            4.5f to 1.5f -> launch("fruitcatching", CrossyRoadActivity::class)
+            20.5f to 12.5f -> door("crossyState")
+            14.5f to 3.5f -> door("fruitState")
+            17.5f to 1.5f -> door("demineurState")
+           // 11.5f to 1.5f -> door("quizState")
+
+        }
+    }
+
+    private fun door(name: String){
+       val session = getSharedPreferences("Session", Context.MODE_PRIVATE) ?: return
+        var gameState = session.getInt(name, 0)
+        if(gameState == 0){
+            when(name){
+                "crossyState" -> launch(name, CrossyRoadActivity::class)
+                "demineurState" -> launch(name, DemineurActivity::class)
+                "fruitState" -> launch(name, FruitActivity::class)
+                //"quizState" -> launch(name, QuizActivity::class)
+
+            }
+
+        }
+        else{
+            Toast.makeText(this,"Jeu déja fini ",Toast.LENGTH_SHORT).show()
         }
     }
 

@@ -13,6 +13,7 @@ class LauncherActivity : AppCompatActivity() {
         SpriteSheet.register(R.drawable.road, 5, 4, this)
         SpriteSheet.register(R.drawable.character64, 1, 1, this)
         SpriteSheet.register(R.drawable.fruit, 1, 1, this)
+        SpriteSheet.register(R.drawable.charactero, 16, 1, this)
     }
 
     fun main(view: android.view.View) {
@@ -29,7 +30,7 @@ class LauncherActivity : AppCompatActivity() {
         startActivity(intent)
     }
     fun Demineur(view: android.view.View) {
-        val intent=Intent(this, Crossyroad::class.java)
+        val intent=Intent(this, DemineurActivity::class.java)
         startActivity(intent)
     }
     fun Quiz(view: android.view.View) {
