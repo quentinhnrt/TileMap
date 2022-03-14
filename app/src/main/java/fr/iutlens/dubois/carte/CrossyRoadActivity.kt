@@ -2,6 +2,7 @@ package fr.iutlens.dubois.carte
 
 
 import android.content.Context
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.view.MotionEvent
@@ -44,12 +45,7 @@ class CrossyRoadActivity : AppCompatActivity(), TimerAction {
         //        Timer("toY").schedule(0, 500) {
 
 
-        val session = getSharedPreferences("Session", Context.MODE_PRIVATE) ?: return
-        var vie = session.getInt("vie", 5)
-        with(session.edit()){
-            putInt("vie", vie-1)
-            apply()
-        }
+
     }
 
     private fun win() {
@@ -72,7 +68,8 @@ class CrossyRoadActivity : AppCompatActivity(), TimerAction {
             apply()
         }
 
-        finish()
+        var intent = Intent(this, MainActivity::class.java)
+        startActivity(intent)
 //        val intent= Intent(this, MainActivity::class.java)
 //        startActivity(intent)
     }
@@ -116,7 +113,8 @@ class CrossyRoadActivity : AppCompatActivity(), TimerAction {
                 putInt("vie", vie - 1)
                 apply()
             }
-            finish()
+            var intent = Intent(this, MainActivity::class.java)
+            startActivity(intent)
         }
 
     }
