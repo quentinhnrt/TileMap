@@ -195,7 +195,7 @@ class MainActivity : AppCompatActivity() {
             20.5f to 12.5f -> door("crossyState")
             14.5f to 3.5f -> door("fruitState")
             17.5f to 1.5f -> door("demineurState")
-           // 11.5f to 1.5f -> door("quizState")
+            11.5f to 1.5f -> door("quizState")
 
         }
     }
@@ -208,7 +208,7 @@ class MainActivity : AppCompatActivity() {
                 "crossyState" -> launch(name, CrossyRoadActivity::class)
                 "demineurState" -> launch(name, DemineurActivity::class)
                 "fruitState" -> launch(name, FruitActivity::class)
-                //"quizState" -> launch(name, QuizActivity::class)
+                "quizState" -> launch(name, Quiz::class)
 
             }
 
