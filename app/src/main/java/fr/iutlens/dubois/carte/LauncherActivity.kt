@@ -17,7 +17,7 @@ class LauncherActivity : AppCompatActivity() {
     }
 
     fun main(view: android.view.View) {
-        val intent=Intent(this, MainActivity::class.java)
+        val intent=Intent(this, CrossyRoadActivity::class.java)
         startActivity(intent)
     }
 

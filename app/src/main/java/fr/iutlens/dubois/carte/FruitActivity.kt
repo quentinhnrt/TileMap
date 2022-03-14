@@ -1,5 +1,6 @@
 package fr.iutlens.dubois.carte
 
+import android.content.Context
 import android.graphics.Matrix
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -109,7 +110,15 @@ class FruitActivity : AppCompatActivity(), TimerAction {
             (it as BasicSprite).y +=0.15f;
             if(it.boundingBox.intersect(hero.boundingBox)){
                 ++cafe
-                if (cafe>=15)finish()
+                if (cafe>=15){
+                    var session = getSharedPreferences("Session", Context.MODE_PRIVATE) ?: return
+                    var vie = session.getInt("vie", 5)
+                    with(session.edit()){
+                        putInt("vie", vie+1)
+                        apply()
+                    }
+                    finish()
+                }
             }
 
 

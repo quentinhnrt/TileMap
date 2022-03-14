@@ -207,8 +207,7 @@ class MainActivity : AppCompatActivity() {
                 "crossyState" -> launch(name, CrossyRoadActivity::class)
                 "demineurState" -> launch(name, DemineurActivity::class)
                 "fruitState" -> launch(name, FruitActivity::class)
-                "quizState" -> launch(name, Quiz::class)
-
+                "quizzState" -> launch(name, Quiz::class)
             }
 
         }
@@ -218,6 +217,14 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun<T : AppCompatActivity> launch(text: String, clazz: KClass<T>) {
+        val session = getSharedPreferences("Session", Context.MODE_PRIVATE) ?: return
+
+        var vie = session.getInt("vie", 5)
+        with(session.edit()){
+            putInt("vie", vie-1)
+            apply()
+        }
+
         val intent= Intent(this, clazz.java)
         startActivity(intent)
     }
@@ -226,8 +233,12 @@ class MainActivity : AppCompatActivity() {
         var session = getSharedPreferences("Session", Context.MODE_PRIVATE) ?: return
         var crossy = session.getInt("crossyState", 0)
         var demineur = session.getInt("demineurState", 0)
-        if(crossy == 1 && demineur == 1){
+        var quizz = session.getInt("quizzState", 0)
+
+        if(crossy == 1 && demineur == 1 && quizz == 1){
             var moy = session.getInt("score", 0)
+            moy /= 3
+
             if(moy > 10){
                 with(session.edit()){
                     putInt("moy", moy)
