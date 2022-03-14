@@ -211,6 +211,9 @@ class MainActivity : AppCompatActivity() {
             }
 
         }
+        else{
+            Toast.makeText(this,"Jeu déja fini ",Toast.LENGTH_SHORT).show()
+        }
     }
 
     private fun<T : AppCompatActivity> launch(text: String, clazz: KClass<T>) {
