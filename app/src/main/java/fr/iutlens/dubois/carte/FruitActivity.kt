@@ -19,7 +19,7 @@ class FruitActivity : AppCompatActivity(), TimerAction {
     private lateinit var listBonus: SpriteList
     private lateinit var timer: RefreshHandler
     private val room by lazy { TiledArea(R.drawable.decor, Decor(Decor.room)) }
-    private val hero by lazy { BasicSprite(R.drawable.character_fruit, room, 5.5F, 8.5F) }
+    private val hero by lazy { BasicSprite(R.drawable.charactero, room, 5.5F, 8.5F) }
     private val fruit by lazy { BasicSprite(R.drawable.fruit, room, 4.5F, 8.5F) }
     private var cafe = 0
     private val gameView by lazy { findViewById<GameView>(R.id.gameViewfruit) }
