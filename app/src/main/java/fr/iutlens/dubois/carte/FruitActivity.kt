@@ -21,7 +21,7 @@ class FruitActivity : AppCompatActivity(), TimerAction {
     private val room by lazy { TiledArea(R.drawable.decor, Decor(Decor.room)) }
     private val hero by lazy { BasicSprite(R.drawable.character_fruit, room, 5.5F, 8.5F) }
     private val fruit by lazy { BasicSprite(R.drawable.fruit, room, 4.5F, 8.5F) }
-
+    private var cafe = 0
     private val gameView by lazy { findViewById<GameView>(R.id.gameViewfruit) }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -42,6 +42,7 @@ class FruitActivity : AppCompatActivity(), TimerAction {
         // On définit les actions des boutons
         timer = RefreshHandler(this)
         timer.scheduleRefresh(500)
+
     }
 
 
@@ -105,10 +106,17 @@ class FruitActivity : AppCompatActivity(), TimerAction {
     override fun update() {
         timer.scheduleRefresh(100)
         listBonus.list.forEach {
-            (it as BasicSprite).y +=0.2f;
+            (it as BasicSprite).y +=0.15f;
+            if(it.boundingBox.intersect(hero.boundingBox)){
+                ++cafe
+                if (cafe>=15)finish()
+            }
+
+
         }
         listBonus.list.retainAll{
             (it as BasicSprite).y < room.data.sizeY  && !it.boundingBox.intersect(hero.boundingBox)
+
         }
         if (Math.random()<0.1f) listBonus.add(BasicSprite(R.drawable.cafe_2, room,
             (room.data.sizeX*Math.random()).toFloat(),
@@ -117,5 +125,12 @@ class FruitActivity : AppCompatActivity(), TimerAction {
         gameView.invalidate()
     }
 
-}
+
+    }
+
+
+
+
+
+
 
