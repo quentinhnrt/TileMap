@@ -58,7 +58,26 @@ class DemineurActivity : AppCompatActivity() {
             MotionEvent.ACTION_UP -> {
                 if (System.currentTimeMillis()-touchTimestamp > 500) {
                     //Toast.makeText(applicationContext, "clic long",  Toast.LENGTH_SHORT).show()
-                    mineMap.flag(point[0]/map.w,point[1]/map.h)
+                    var winMod = mineMap.flag(point[0]/map.w,point[1]/map.h)
+                    if (winMod == 1) {
+                        val session = this.getSharedPreferences("Session", Context.MODE_PRIVATE)
+                        var score = session.getInt("score", 0)
+                        var note = when(lose){
+                            0 -> 20
+                            1 -> 15
+                            2 -> 10
+                            else -> 0
+                        }
+                        with(session.edit()) {
+                            putInt("demineurState", 1)
+                            putInt("demineurNote", note)
+                            putInt("score", score + note)
+                            apply()
+                        }
+                        //var state = session.getInt("demineurState", 0)
+                        //Log.d("osecour", state.toString())
+                        finish()
+                    }
                 }
                 else {
                     var loseMod = mineMap.show(point[0] / map.w, point[1] / map.h)
