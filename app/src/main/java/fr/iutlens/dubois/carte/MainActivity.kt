@@ -81,6 +81,7 @@ class MainActivity : AppCompatActivity() {
 
         vieText.text = vie.toString()
         scoreText.text = score.toString()
+        end()
     }
 
 
@@ -221,5 +222,32 @@ class MainActivity : AppCompatActivity() {
     private fun<T : AppCompatActivity> launch(text: String, clazz: KClass<T>) {
         val intent= Intent(this, clazz.java)
         startActivity(intent)
+    }
+
+    private fun end() {
+        var session = getSharedPreferences("Session", Context.MODE_PRIVATE) ?: return
+        var crossy = session.getInt("crossyState", 0)
+        var demineur = session.getInt("demineurState", 0)
+        if(crossy == 1 && demineur == 1){
+            var moy = session.getInt("score", 0)
+            if(moy > 10){
+                with(session.edit()){
+                    putInt("moy", moy)
+                    putInt("result", 0)
+                    apply()
+                }
+
+            }else{
+                with(session.edit()){
+                    putInt("moy", moy)
+                    putInt("result", 1)
+                    apply()
+                }
+            }
+
+            val intent = Intent(this, EndActivity::class.java)
+            startActivity(intent)
+
+        }
     }
 }
